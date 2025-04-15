@@ -9,7 +9,7 @@ ui <- fluidPage(
       fileInput("archivo", "Sube tu archivo CSV", accept = c(".csv")),
       selectInput("analisis", "Selecciona el tipo de análisis:",
                   choices = c("Prueba t", "ANOVA")),
-      helpText("Variables esperadas: Peso, Edad y Sexo.")
+      helpText("Variables: Peso, Edad y Sexo.")
     ),
     
     mainPanel(
@@ -36,7 +36,7 @@ server <- function(input, output) {
       verbatimTextOutput("resultado"),
       h4("Gráfico"),
       plotOutput("grafico"),
-      h4("Interpretación con 'report'"),
+      h4("Interpretación"),
       verbatimTextOutput("interpretacion")
     )
   })
