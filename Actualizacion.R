@@ -13,20 +13,20 @@ ui <- fluidPage(
     ),
     
     mainPanel(
-      uiOutput("salidaUI")  # Contenedor que se renderiza dinámicamente
+      uiOutput("salidaUI")  
     )
   )
 )
 
 server <- function(input, output) {
   
-  # Cargar los datos
+  
   datos <- reactive({
     req(input$archivo)
     read.csv(input$archivo$datapath, stringsAsFactors = TRUE)
   })
   
-  # Mostrar resultados solo si se ha subido archivo
+  
   output$salidaUI <- renderUI({
     req(input$archivo)
     tagList(
@@ -41,13 +41,13 @@ server <- function(input, output) {
     )
   })
   
-  # Resumen estadístico
+  
   output$resumen <- renderPrint({
     req(datos())
     summary(datos())
   })
   
-  # Resultado numérico (t-test o ANOVA)
+  
   output$resultado <- renderPrint({
     req(datos())
     data <- datos()
@@ -61,7 +61,7 @@ server <- function(input, output) {
     }
   })
   
-  # Gráfico
+  
   output$grafico <- renderPlot({
     req(datos())
     data <- datos()
@@ -77,7 +77,7 @@ server <- function(input, output) {
     }
   })
   
-  # Interpretación con `report`
+  
   output$interpretacion <- renderPrint({
     req(datos())
     data <- datos()
